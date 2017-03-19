@@ -1,2 +1,2 @@
 # M-Scripts
-MATLAB/GNU Octave M scripts for models and controllers 
+MATLAB/GNU Octave M-scripts for models and controllers 
