@@ -7,18 +7,16 @@ clear
 close all
 
 % Parameter
-K_S = 1.5;    % Proportionalfaktor
-T_1 = 3.0;    % [s] Zeitkonstante
-T_2 = 1.0;    % [s] Zeitkonstante
+K_S = 1.5;      % Proportionalfaktor
+T_1 = 3.0;      % [s] Zeitkonstante
+T_2 = 1.0;      % [s] Zeitkonstante
 
-K_krit = 22.60;  % probiert
-T_krit = 1.93;   % [s] Periodendauer
+K_krit = 22.6;  % probiert
+T_krit = 1.93;  % [s] Periodendauer
 
-T_E = 12;   % [s] Simulationsdauer
-T_0 = 0.25; % [s] Abtastzeit
-
-s   = tf ('s');       % Laplace-Op
-z   = tf ('z', T_0);  % Verschiebe-Op
+T_E = 12;       % [s] Simulationsdauer
+T_0 = 0.25;     % [s] Abtastzeit
+s   = tf ('s'); % Laplace-Op
 
 % Kontinuierliche und diskrete Strecke
 G_S = K_S / (1 + (T_1+T_2)*s + T_1*T_2*s^2);

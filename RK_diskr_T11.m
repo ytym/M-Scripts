@@ -7,22 +7,20 @@ clear
 close all
 
 % Parameter
-K_S = 1.5;  % Proportionalfaktor
-T_1 = 3.0;  % [s] Zeitkonstante
-T_2 = 1.0;  % [s] Zeitkonstante
+K_S = 1.5;      % Proportionalfaktor
+T_1 = 3.0;      % [s] Zeitkonstante
+T_2 = 1.0;      % [s] Zeitkonstante
 
-T_U = 0.45; % [s] Verzugszeit
-T_G = 5.20; % [s] Ausgleichszeit
+T_U = 0.45;     % [s] Verzugszeit
+T_G = 5.20;     % [s] Ausgleichszeit
 
-T_E = 12;   % [s] Simulationsdauer
-T_0 = 0.25; % [s] Abtastzeit
-
-s   = tf ('s');       % Laplace-Op
-z   = tf ('z', T_0);  % Verschiebe-Op
+T_E = 12;       % [s] Simulationsdauer
+T_0 = 0.25;     % [s] Abtastzeit
+s   = tf ('s'); % Laplace-Op
 
 % Kontinuierliche und diskrete Strecke
-G_S = K_S / (1 + (T_1+T_2)*s + T_1*T_2*s^2);
-G_Sd= c2d (G_S, T_0);
+G_S  = K_S / (1 + (T_1+T_2)*s + T_1*T_2*s^2);
+G_Sd = c2d (G_S, T_0);
 
 % PID-Regler nach Übergangsfunktion, Takahashi (1.1)
 K_R = 1.2*T_G / (K_S*(T_U+T_0));

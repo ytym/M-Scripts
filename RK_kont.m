@@ -22,18 +22,18 @@
   G_S = K_S / (1 + (T_1+T_2)*s + T_1*T_2*s^2);
 
 % Chien, Hrones und Reswick fuer Fuehrung aperiodisch
-  K_R  = 0.6*T_G / (K_S*T_U);
-  T_N  = T_G;
-  T_V  = 0.5 * T_U;
-  G_Rw = pidstd (K_R, T_N, T_V, 100); % PID-T1 wegen G_wy
+  K_Rw = 0.6*T_G / (K_S*T_U);
+  T_Nw = T_G;
+  T_Vw = 0.5 * T_U;
+  G_Rw = pidstd (K_Rw, T_Nw, T_Vw, 100); % PID-T1 wegen G_wy
   G_wx = feedback (G_Rw*G_S, 1);      % w -> x
   G_wy = feedback (G_Rw, G_S);        % w -> y
 
 % Chien, Hrones und Reswick fuer Stoerung aperiodisch
-  K_R  = 0.95*T_G / (K_S*T_U);
-  T_N  = 2.4 * T_U;
-  T_V  = 0.42 * T_U;
-  G_Rz = pidstd (K_R, T_N, T_V);
+  K_Rz = 0.95*T_G / (K_S*T_U);
+  T_Nz = 2.4 * T_U;
+  T_Vz = 0.42 * T_U;
+  G_Rz = pidstd (K_Rz, T_Nz, T_Vz);
   G_zx = feedback (G_S, G_Rz);      % z -> x
   G_zy = feedback (-G_Rz*G_S, -1);  % z -> y
 
@@ -51,7 +51,7 @@ figure ('Name', 'Fuehrung', 'NumberTitle', 'off', 'Position', [0 100 800 600]);
   legend ('w(t)', 'x(t)', 'y(t)')
   legend boxoff
   txt = {'Streckenparameter K_S, T_1, T_2:'; num2str([K_S T_1 T_2]); ' '
-          'Reglerparameter K_R, T_N, T_V:'; num2str([K_R T_N T_V]); ' '
+          'Reglerparameter K_R, T_N, T_V:'; num2str([K_Rw T_Nw T_Vw]); ' '
           evalc('G_R=minreal(G_Rw)')};
   text (4, 0.8, txt, 'fontsize', 13)
   hold off
@@ -71,7 +71,7 @@ figure ('Name', 'Stoerung', 'NumberTitle', 'off', 'Position', [200 200 800 600])
   legend ('z(t)', 'x(t)', 'y(t)')
   legend boxoff
   txt = {'Streckenparameter K_S, T_1, T_2:'; num2str([K_S T_1 T_2]); ' '
-          'Reglerparameter K_R, T_N, T_V:'; num2str([K_R T_N T_V]); ' '
+          'Reglerparameter K_R, T_N, T_V:'; num2str([K_Rz T_Nz T_Vz]); ' '
           evalc('G_R=minreal(G_Rz)')};
   text (4.5, -0.1, txt, 'fontsize', 13)
   hold off
