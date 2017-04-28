@@ -18,7 +18,6 @@ T_E = 12;     % [s] Simulationsdauer
 T_0 = 0.25;   % [s] Abtastzeit
 
 s = tf ('s');       % Laplace-Op
-z = tf ('z', T_0);  % Verschiebe-Op
 
 % Kontinuierliche und diskrete Strecke
 G_S = K_S / (1 + (T_1+T_2)*s + T_1*T_2*s^2);
@@ -32,10 +31,13 @@ T_V = 3*K_krit*T_krit / (40*K_R);
 q_i = [K_R*(1+T_0/(2*T_N)+T_V/T_0) ...
       -K_R*(1-T_0/(2*T_N)+2*T_V/T_0) K_R*T_V/T_0];
 p_i = [1 -1 0];
-G_R = tf (q_i, p_i, T_0);
+r_i  = [K_R*T_0/T_N 0 0];
+G_R1 = tf (q_i, p_i, T_0);
+G_R2 = tf (r_i, p_i, T_0);
 
-G_w = feedback (G_R, G_Sd);       % Regelkreis w -> y
-G_z = feedback (-G_Sd * G_R, -1); % Regelkreis z -> y
+G_w = minreal (G_R2 * feedback (1, G_Sd*G_R1)); % Regelkreis w -> y
+G_z = feedback (-G_Sd * G_R1, -1);              % Regelkreis z -> y
+
 G_w_krit = feedback (K_krit, G_Sd); % Stab.-grenze w -> y
 
 figure ('Name', 'Fuehrung', 'NumberTitle', 'off', 'Position', [0 100 800 600]);
@@ -53,7 +55,7 @@ figure ('Name', 'Fuehrung', 'NumberTitle', 'off', 'Position', [0 100 800 600]);
   legend boxoff
   txt = {'Streckenparameter K_S, T_1, T_2:'; num2str([K_S T_1 T_2]); ' '
          'Reglerparameter K_R, T_N, T_V:'; num2str([K_R T_N T_V]); ' '
-         evalc('G_R')};
+         evalc('G_R1')};
   text (4.2, -1, txt, 'fontsize', 13)
   printgcf (mfilename, 0)
 
@@ -72,7 +74,7 @@ figure ('Name', 'Stoerung', 'NumberTitle', 'off', 'Position', [200 200 800 600])
   legend boxoff
   txt = {'Streckenparameter K_S, T_1, T_2:'; num2str([K_S T_1 T_2]); ' '
          'Reglerparameter K_R, T_N, T_V:'; num2str([K_R T_N T_V]); ' '
-         evalc('G_R')};
+         evalc('G_R1')};
   text (4.2, 0.2, txt, 'fontsize', 13)
   printgcf (mfilename, 0)
 

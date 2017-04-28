@@ -16,6 +16,7 @@ T_G = 5.20;     % [s] Ausgleichszeit
 
 T_E = 12;       % [s] Simulationsdauer
 T_0 = 0.25;     % [s] Abtastzeit
+%T_0 = 0.01;          % [s] Abtastzeit
 s   = tf ('s'); % Laplace-Op
 
 % Kontinuierliche und diskrete Strecke
