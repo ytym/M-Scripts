@@ -96,3 +96,8 @@ figure ('Name', 'Pol-Nullstellen', 'NumberTitle', 'off', 'Position', [100 0 800 
   text (-4.8, 0, txt, 'fontsize', 10)
   hold off
   printgcf (mfilename, 0)
+
+% Regelguete berechnen
+  [x_w, t_w] = step (G_wx, t_x);
+  e_w = 1-x_w;
+  RG = e_w'*e_w*D_t;
