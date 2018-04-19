@@ -2,7 +2,7 @@ function Einrad
 % Einrad.m – getestet mit MATLAB + CST sowie GNU Octave + Control
 % Manfred Lohöfener, HS Merseburg, 12.05.2014
 
-    clear all
+    clear
     close all	% sicher ist sicher
 
 % Parameter
