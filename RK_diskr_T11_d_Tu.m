@@ -1,4 +1,4 @@
-% Diskreter Regelkreis mit Laufzeit RK_diskr_T11_d.m
+% Diskreter Regelkreis mit Laufzeit RK_diskr_T11_d_Tu.m
 % Getestet mit MATLAB + CST und 
 % mit GNU Octave + Control-Package
 % Manfred Lohoefener, HS Merseburg, Maerz 2017
